@@ -21,11 +21,17 @@
 **droput模型以更小的步幅更新，却与起始模型的距离更大，这说明，dropout以更一致的方向前进，而没用droput的模型，方向随机性比较大，导致可能走了原路。**
 
 三是**Gradient direction variance**。作者提出假设：dropout模型在mini-batches中产生了更一致的梯度更新方向。为了验证这个，作者提出了 gradient direction variance（GDV），通过计算每两个梯度的平均余铉距离：
+
 ![](Images/EDLD_3.png)
+
 下图支持了作者的假设，在训练早期（大概1000个iterations），dropout模型产生的梯度方向更加一致。
+
 ![](Images/EDLD_4.png)
 
 四是**Gradient direction error**。设 *g* 为模型为推理模式下在整个数据集上的梯度，*g*<sub>step</sub>为模型在每个mini-batches下的梯度，则 gradient direction error（GDE）的公式为：
+
 ![](Images/EDLD_5.png)
+
 **从下图可知，在训练早期，dropout模型产生的梯度方向更接近整个数据集下的梯度方向；在训练后期，非dropout模型产生的梯度方向更接近整个数据集下的梯度方向**。
+
 ![](Images/EDLD_6.png)
